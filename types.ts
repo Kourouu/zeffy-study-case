@@ -1,4 +1,4 @@
-export type Donation = {
+export type DonationDetails = {
     id: string,
     firstName: string,
     lastName: string,
@@ -11,9 +11,11 @@ export type Donation = {
 
 type DonationType = 'Charge' | 'Manual'
 
-export type DonationResponse = {
+export type Donation = {
   id: string,
   type: DonationType,
   refundedAmount: number,
-  donation: Donation
-}[]
+  donation: DonationDetails
+}
+
+export type DonationResponse = Donation[]
