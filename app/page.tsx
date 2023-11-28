@@ -1,7 +1,10 @@
 'use client'
-
-import { Donation, DonationResponse } from '@/types';
 import { useEffect, useState } from 'react';
+
+
+import { DonationResponse } from '@/types';
+
+import { Table } from './components/table/page'
 
 export default function Home() {
 
@@ -19,15 +22,6 @@ export default function Home() {
   console.log(donations)
 
   return (
-    <table>
-      {donations.map((donation) => (
-        <tr key={donation.id}>
-          <td>{donation.donation.createdAtUtc}</td>
-          <td>{donation.donation.firstName}</td>
-          <td>{donation.donation.lastName}</td>
-          <td>{donation.donation.amount}</td>
-        </tr>
-      ))}
-    </table>
+    <Table donations={donations} />
   );
 }
