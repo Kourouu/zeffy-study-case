@@ -19,8 +19,6 @@ export default function Home() {
       .catch((error) => setError(error));
   }, []);
 
-  console.log(donations)
-
   return (
     error ? 
       (<>Une erreur est survenue</>) :
