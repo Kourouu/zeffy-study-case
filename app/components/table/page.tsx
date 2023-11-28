@@ -1,4 +1,5 @@
 import { DonationResponse } from "@/types";
+import { formatDate } from "@/utils";
 
 export const Table = ({donations}: {donations: DonationResponse}) => {
   return (
@@ -14,7 +15,7 @@ export const Table = ({donations}: {donations: DonationResponse}) => {
       <tbody>
       {donations.map((donation) => (
         <tr key={donation.id}>
-          <td>{donation.donation.createdAtUtc}</td>
+          <td>{formatDate(donation.donation.createdAtUtc)}</td>
           <td>{donation.donation.firstName}</td>
           <td>{donation.donation.lastName}</td>
           <td>{donation.donation.amount}</td>
