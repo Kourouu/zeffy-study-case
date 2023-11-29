@@ -9,7 +9,6 @@ export async function GET(request: Request, { params }: {params: {page: number}}
   const sorted = data.sort((a, b) => a.donation.createdAtUtc < b.donation.createdAtUtc ? 1 : -1)
   const limit = 10;
   const values = [(page - 1) * limit, page * limit - 1]
-  console.log(values)
   const sliced = sorted.slice(values[0],values[1])
 
   return Response.json({ data: sliced })

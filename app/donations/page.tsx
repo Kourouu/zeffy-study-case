@@ -26,7 +26,6 @@ export default function Donations({
     else page = value.toString()
     const params = new URLSearchParams(searchParams);
     params.set('page', page)
-    console.log(pathname);
     replace(`${pathname}?${params}`);
   }
   
