@@ -1,7 +1,6 @@
 'use client'
 import { useEffect, useState } from 'react';
 
-
 import { DonationResponse } from '@/types';
 
 import { Table } from './components/table/page'
@@ -10,18 +9,35 @@ export default function Home() {
 
   const [donations, setDonations] = useState<DonationResponse>([]);
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [page, setPage] = useState(0);
+  
   useEffect(() => {
-    fetch(`http://localhost:3000/api/donations`)
-      .then((response) => response.json())
+    setIsLoading(true)
+    fetch(`http://localhost:3000/api/donations/${page}`)
+      .then((response) => {
+        return response.json()
+      }
+      )
       .then((data: {data: DonationResponse}) => {
-        setDonations(data.data);
+        setIsLoading(false)
+        setDonations(data.data)
       })
-      .catch((error) => setError(error));
-  }, []);
+      .catch((error) => {
+        setIsLoading(false)
+        setError(error)
+      });
+  }, [setIsLoading, setDonations, setError, page]);
+
+  if (isLoading) {
+    return (<>Chargement en cours</>)
+  }
+
+  if (error) {
+    return (<>Une erreur est survenue</>)
+  }
 
   return (
-    error ? 
-      (<>Une erreur est survenue</>) :
-      (<Table donations={donations} />)    
-  );
+  <Table donations={donations} />
+  )
 }
